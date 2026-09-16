@@ -26,7 +26,7 @@ unset($_SESSION['form_error']);
                     <?php if (empty($site['address']) && empty($site['phone']) && empty($site['email'])): ?><div class="alert alert-light border mb-0">Business contact fields are waiting for your verified GBP details.</div><?php endif; ?>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7" id="enquiry">
                 <div class="lead-wrap">
                     <?php if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
                     <div class="eyebrow text-warning mb-2">Enquiry</div>
