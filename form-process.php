@@ -7,11 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Method not allowed');
 }
 
-$back = $_SERVER['HTTP_REFERER'] ?? '/contact.php';
+$errorRedirect = '/contact.php#enquiry';
 $token = $_POST['csrf_token'] ?? '';
 if (!hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
     $_SESSION['form_error'] = 'Your session expired. Please submit the form again.';
-    header('Location: ' . $back);
+    header('Location: ' . $errorRedirect);
     exit;
 }
 
@@ -23,7 +23,7 @@ if (!empty($_POST['website'])) {
 
 $clean = static function (string $value, int $max = 255): string {
     $value = trim(preg_replace('/\s+/', ' ', strip_tags($value)) ?? '');
-    return mb_substr($value, 0, $max);
+    return substr($value, 0, $max);
 };
 $csvSafe = static function (string $value): string {
     return preg_match('/^[=+\-@]/', $value) ? "'" . $value : $value;
@@ -37,15 +37,15 @@ $message = $clean($_POST['message'] ?? '', 1000);
 $context = $clean($_POST['context'] ?? 'General Enquiry', 160);
 $sourceUrl = $clean($_POST['source_url'] ?? '/', 300);
 
-$phoneDigits = preg_replace('/\D+/', '', $phone);
+$phoneDigits = preg_replace('/\D+/', '', $phone) ?? '';
 $errors = [];
-if (mb_strlen($name) < 2) $errors[] = 'Please enter your name.';
+if (strlen($name) < 2) $errors[] = 'Please enter your name.';
 if (strlen($phoneDigits) < 8 || strlen($phoneDigits) > 15) $errors[] = 'Please enter a valid phone number.';
 if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Please enter a valid email address.';
 
 if ($errors) {
     $_SESSION['form_error'] = implode(' ', $errors);
-    header('Location: ' . $back);
+    header('Location: ' . $errorRedirect);
     exit;
 }
 
@@ -92,7 +92,7 @@ if ($notify !== '' && filter_var($notify, FILTER_VALIDATE_EMAIL)) {
 
 if (!$stored && !$mailed) {
     $_SESSION['form_error'] = 'The enquiry could not be saved on this server. Please contact CadMate directly.';
-    header('Location: ' . $back);
+    header('Location: ' . $errorRedirect);
     exit;
 }
 
