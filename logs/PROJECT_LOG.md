@@ -47,3 +47,10 @@ Public business details and canonical social URLs are maintained in `config/site
 - Individual course URLs now use `/courses/{course-slug}/`.
 - Updated course canonical URLs and ItemList/Course structured-data URLs to the clean route format.
 - Updated homepage, header and footer course links to use the clean route structure.
+
+
+### Sitemap & Crawl Setup — 2026-09-18
+- Added dynamic `sitemap.php` covering core pages, course categories and every configured course.
+- Added public `/sitemap.xml` rewrite.
+- Added `robots.txt` with sitemap reference and protection for form/storage endpoints.
+- Sitemap uses the new clean `/courses/` URL structure.

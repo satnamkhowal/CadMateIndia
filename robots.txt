@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /storage/
+Disallow: /form-process.php
+
+Sitemap: https://cadmateindia.com/sitemap.xml
