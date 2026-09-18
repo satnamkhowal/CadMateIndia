@@ -35,9 +35,8 @@ $canonicalUrl = $canonicalUrl ?? null;
     </div>
     <nav class="navbar navbar-expand-xl bg-white border-bottom py-2">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="/" aria-label="CadMate India home">
-                <img src="/assets/brand/cadmate-icon.png" alt="" class="brand-icon">
-                <span class="brand-wordmark"><strong>CADMATE</strong><small>Upskill Yourself for Better Careers</small></span>
+            <a class="navbar-brand" href="/" aria-label="CadMate India home">
+                <img src="<?= e($site['logo']) ?>" alt="CadMate India - CAD and Design Training Institute in Jaipur" class="brand-logo" width="220" height="46">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

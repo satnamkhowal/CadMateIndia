@@ -16,6 +16,8 @@ $schema = [
     '@type' => 'EducationalOrganization',
     'name' => $site['name'],
     'url' => 'https://cadmateindia.com/',
+    'logo' => 'https://cadmateindia.com' . $site['logo'],
+    'image' => 'https://cadmateindia.com' . $site['logo'],
     'email' => $site['email'],
     'telephone' => '+91-' . $site['phone'],
     'description' => $site['business_description'],
@@ -56,7 +58,7 @@ $schema = [
             </div>
             <div class="col-lg-5">
                 <div class="hero-brand-card">
-                    <img src="/assets/brand/cadmate-icon.png" alt="CadMate India" class="hero-brand-icon">
+                    <img src="<?= e($site['favicon']) ?>" alt="CadMate India icon" class="hero-brand-icon">
                     <div class="eyebrow mt-3">Upskill yourself for better careers</div>
                     <h2 class="h3 mt-2">Three focused learning tracks</h2>
                     <div class="track-list mt-4">

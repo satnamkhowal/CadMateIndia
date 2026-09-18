@@ -3,9 +3,8 @@
     <div class="container py-5">
         <div class="row g-4">
             <div class="col-lg-4">
-                <div class="footer-brand d-flex align-items-center gap-3 mb-3">
-                    <img src="/assets/brand/cadmate-icon.png" alt="CadMate India" class="footer-icon">
-                    <div><strong>CADMATE INDIA</strong><small>Upskill Yourself for Better Careers</small></div>
+                <div class="footer-logo-panel">
+                    <img src="<?= e($site['logo']) ?>" alt="CadMate India" class="footer-logo" width="220" height="46">
                 </div>
                 <p class="mb-3">Practical CAD, BIM, engineering design, creative design and technology training in Jaipur.</p>
                 <?php if (!empty($site['phone'])): ?><p class="mb-1"><strong>Phone:</strong> <a class="d-inline" href="tel:+91<?= e($site['phone']) ?>">+91 <?= e($site['phone']) ?></a></p><?php endif; ?>
