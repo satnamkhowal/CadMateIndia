@@ -28,3 +28,13 @@ Public business details and canonical social URLs are maintained in `config/site
 - Canonical SEO-friendly web asset: `assets/brand/cadmate-india-icon.png`.
 - Brand artwork must NOT be redrawn, recolored, cropped, retyped, AI-regenerated, or otherwise visually altered.
 - Website CSS may only scale the supplied artwork proportionally for responsive display.
+
+
+### Courses & Navigation Design Refresh — 2026-09-18
+- Rebuilt `courses.php` so `/courses.php` is a complete all-courses catalog instead of silently defaulting to CAD.
+- Kept category routes: `?category=cad`, `?category=design`, and `?category=it`.
+- Added SEO titles/descriptions, canonical URLs and ItemList structured data.
+- Replaced the three separate desktop course nav menus with one responsive Courses mega-menu.
+- Refreshed course cards, filters, hero, counselling section and mobile layout.
+- Refreshed `course.php` design with Course structured data, quick facts, learning approach, related courses and sticky enquiry.
+- Original CadMate India supplied logo/icon remain unchanged; only proportional display sizing is used.

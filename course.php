@@ -1,35 +1,80 @@
 <?php
 require __DIR__ . '/includes/bootstrap.php';
+
 $slug = trim($_GET['slug'] ?? '');
 $course = courseBySlug($courseGroups, $slug);
+
 if (!$course) {
     http_response_code(404);
     $pageTitle = 'Course Not Found | CadMate India';
+    $pageDescription = 'Browse available CAD, design, media, programming, data and technology courses at CadMate India in Jaipur.';
+    $canonicalUrl = 'https://cadmateindia.com/courses.php';
     require __DIR__ . '/includes/header.php';
-    echo '<section class="section-space"><div class="container"><h1>Course not found</h1><p>The requested course is not available in the current catalog.</p><a class="btn btn-brand" href="/courses.php?category=cad">Browse Courses</a></div></section>';
+    echo '<section class="section-space"><div class="container"><div class="content-card"><h1>Course not found</h1><p class="text-secondary">The requested course is not available in the current catalog.</p><a class="btn btn-brand" href="/courses.php">Browse Courses</a></div></div></section>';
     require __DIR__ . '/includes/footer.php';
     exit;
 }
+
 $pageTitle = $course['name'] . ' Course in Jaipur | CadMate India';
-$pageDescription = 'Explore ' . $course['name'] . ' training in Jaipur at CadMate India. Learn about the practical focus, course direction and enquiry options.';
+$pageDescription = 'Explore ' . $course['name'] . ' training in Jaipur at CadMate India with a practical learning focus and course counselling.';
+$canonicalUrl = 'https://cadmateindia.com/course.php?slug=' . rawurlencode($course['slug']);
+
+$group = $courseGroups[$course['group_key']];
+$related = array_values(array_filter($group['courses'], static fn($item) => $item['slug'] !== $course['slug']));
+$related = array_slice($related, 0, 3);
+
+$schema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Course',
+    'name' => $course['name'] . ' Course in Jaipur',
+    'description' => $pageDescription,
+    'url' => $canonicalUrl,
+    'provider' => [
+        '@type' => 'EducationalOrganization',
+        'name' => 'CadMate India',
+        'url' => 'https://cadmateindia.com/',
+    ],
+];
+
 require __DIR__ . '/includes/header.php';
 ?>
-<section class="page-hero">
+<script type="application/ld+json"><?= json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+
+<section class="course-detail-hero">
     <div class="container">
-        <div class="breadcrumb-lite mb-2"><a href="/">Home</a> / <a href="/courses.php?category=<?= e($course['group_key']) ?>"><?= e($course['group_label']) ?></a> / <?= e($course['name']) ?></div>
-        <div class="row align-items-center g-4">
+        <div class="courses-breadcrumb">
+            <a href="/">Home</a><span>›</span><a href="/courses.php">Courses</a><span>›</span><a href="/courses.php?category=<?= e($course['group_key']) ?>"><?= e($course['group_label']) ?></a><span>›</span><span><?= e($course['name']) ?></span>
+        </div>
+
+        <div class="row g-5 align-items-center">
             <div class="col-lg-7">
-                <div class="eyebrow mb-2"><?= e($course['discipline']) ?></div>
-                <h1 class="display-5 fw-bold"><?= e($course['name']) ?> Course in Jaipur</h1>
-                <p class="lead text-secondary">A focused learning path for students and professionals who want practical exposure in <?= e($course['discipline']) ?>. Final syllabus, duration, fees and batch details will be published only after verification.</p>
-                <a class="btn btn-brand btn-lg" href="#enquire">Ask About This Course</a>
+                <div class="hero-kicker"><span class="pulse-dot"></span><?= e($course['discipline']) ?></div>
+                <h1><?= e($course['name']) ?> Course in Jaipur</h1>
+                <p class="lead">A practical learning path for building familiarity with <?= e(strtolower($course['discipline'])) ?> concepts, tools and project-style workflows.</p>
+
+                <div class="course-detail-actions">
+                    <a class="btn btn-brand btn-lg" href="#enquire">Request Course Counselling</a>
+                    <a class="btn btn-outline-dark btn-lg" href="/courses.php?category=<?= e($course['group_key']) ?>">Explore Related Courses</a>
+                </div>
+
+                <div class="course-quick-facts">
+                    <div><span>Track</span><strong><?= e($course['group_label']) ?></strong></div>
+                    <div><span>Learning style</span><strong>Practical & guided</strong></div>
+                    <div><span>Location</span><strong>Jaipur</strong></div>
+                </div>
             </div>
+
             <div class="col-lg-5">
-                <?php if (!empty($course['image'])): ?>
-                    <img class="img-fluid rounded-4 border" src="/<?= e($course['image']) ?>" alt="<?= e($course['name']) ?> training in Jaipur">
-                <?php else: ?>
-                    <div class="course-placeholder rounded-4"><?= e(substr($course['name'], 0, 2)) ?></div>
-                <?php endif; ?>
+                <div class="course-detail-media course-theme-<?= e($course['group_key']) ?>">
+                    <?php if (!empty($course['image'])): ?>
+                        <img src="/<?= e($course['image']) ?>" alt="<?= e($course['name']) ?> training in Jaipur at CadMate India">
+                    <?php else: ?>
+                        <div class="course-detail-placeholder">
+                            <span><?= e(mb_strtoupper(mb_substr($course['name'], 0, 2))) ?></span>
+                            <small><?= e($course['discipline']) ?></small>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
@@ -37,34 +82,63 @@ require __DIR__ . '/includes/header.php';
 
 <section class="section-space">
     <div class="container">
-        <div class="row g-4">
+        <div class="row g-4 g-xl-5">
             <div class="col-lg-8">
-                <div class="content-card mb-4">
-                    <div class="eyebrow mb-2">Course direction</div>
-                    <h2 class="h3">What this learning path is designed around</h2>
-                    <p>The page structure is intentionally separated from unverified commercial details. Course-specific curriculum, software versions, prerequisites, duration, certification wording and fees can be added after CadMate confirms them.</p>
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-6"><div class="p-3 rounded-3 bg-light"><strong>Foundation</strong><div class="text-secondary small mt-1">Start from the core concepts and workflow relevant to <?= e($course['name']) ?>.</div></div></div>
-                        <div class="col-md-6"><div class="p-3 rounded-3 bg-light"><strong>Hands-on practice</strong><div class="text-secondary small mt-1">Build familiarity through guided exercises and practical assignments.</div></div></div>
-                        <div class="col-md-6"><div class="p-3 rounded-3 bg-light"><strong>Applied workflow</strong><div class="text-secondary small mt-1">Connect tools and techniques to real project-style tasks.</div></div></div>
-                        <div class="col-md-6"><div class="p-3 rounded-3 bg-light"><strong>Career guidance</strong><div class="text-secondary small mt-1">Use counselling to understand how this skill fits your education or career direction.</div></div></div>
+                <div class="course-content-section">
+                    <div class="eyebrow mb-2">Learning approach</div>
+                    <h2>How the <?= e($course['name']) ?> learning path is structured</h2>
+                    <p>CadMate India keeps course pages focused on practical learning and verifies commercial or batch-specific information before publishing it.</p>
+
+                    <div class="learning-grid">
+                        <div><span>01</span><strong>Core concepts</strong><p>Build the foundation needed to understand the tool, terminology and workflow.</p></div>
+                        <div><span>02</span><strong>Guided practice</strong><p>Work through exercises that reinforce the core workflow step by step.</p></div>
+                        <div><span>03</span><strong>Applied tasks</strong><p>Connect the learning to project-style tasks relevant to <?= e(strtolower($course['discipline'])) ?>.</p></div>
+                        <div><span>04</span><strong>Next-step guidance</strong><p>Discuss how the skill can fit your education, internship or career learning plan.</p></div>
                     </div>
                 </div>
-                <div class="content-card">
-                    <div class="eyebrow mb-2">Content status</div>
-                    <h2 class="h3">Details waiting for CadMate verification</h2>
-                    <p class="mb-2">Before public launch, the following should come from CadMate’s verified business/course information rather than assumptions:</p>
-                    <p class="mb-0 text-secondary">Exact syllabus • software/version • course duration • fee • batch schedule • trainer details • certificate wording • placement/internship claims • eligibility • project list.</p>
+
+                <div class="course-info-strip">
+                    <div>
+                        <div class="eyebrow mb-2">Current course details</div>
+                        <h2 class="h3">Get the latest batch information directly from CadMate India</h2>
+                        <p class="mb-0">Current duration, fee, batch timing, software/version, eligibility, certificate wording and project details are confirmed during counselling so the website does not publish outdated information.</p>
+                    </div>
                 </div>
+
+                <?php if ($related): ?>
+                <div class="related-course-block">
+                    <div class="d-flex flex-wrap justify-content-between gap-3 align-items-end mb-4">
+                        <div>
+                            <div class="eyebrow mb-2">Keep exploring</div>
+                            <h2 class="h3 mb-0">Related <?= e($course['group_label']) ?> courses</h2>
+                        </div>
+                        <a class="group-link" href="/courses.php?category=<?= e($course['group_key']) ?>">View full track →</a>
+                    </div>
+                    <div class="row g-3">
+                        <?php foreach ($related as $item): ?>
+                            <div class="col-md-4">
+                                <a class="related-course-card" href="/course.php?slug=<?= e($item['slug']) ?>">
+                                    <small><?= e($item['discipline']) ?></small>
+                                    <strong><?= e($item['name']) ?></strong>
+                                    <span>View course →</span>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
+
             <div class="col-lg-4" id="enquire">
-                <div class="lead-wrap">
+                <div class="course-enquiry-sticky">
                     <div class="eyebrow text-warning mb-2">Course enquiry</div>
                     <h2 class="h4">Ask about <?= e($course['name']) ?></h2>
+                    <p>Get current batch, duration, fee and centre information.</p>
                     <?php $formContext = $course['name'] . ' Course'; $formCompact = true; require __DIR__ . '/includes/enquiry-form.php'; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <?php require __DIR__ . '/includes/footer.php'; ?>
