@@ -19,3 +19,12 @@
 
 ### Website Source of Truth
 Public business details and canonical social URLs are maintained in `config/site.php`.
+
+
+### Branding Lock — 2026-09-18
+- Official website header logo: original user-supplied `cademate india logo in in hoizaontal form for light bacdround.png`.
+- Canonical SEO-friendly web asset: `assets/brand/cadmate-india-logo-horizontal-light.png`.
+- Official favicon / brand icon: original user-supplied `Cad Mate India icon.png`.
+- Canonical SEO-friendly web asset: `assets/brand/cadmate-india-icon.png`.
+- Brand artwork must NOT be redrawn, recolored, cropped, retyped, AI-regenerated, or otherwise visually altered.
+- Website CSS may only scale the supplied artwork proportionally for responsive display.
