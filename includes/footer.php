@@ -12,14 +12,14 @@
             </div>
             <div class="col-6 col-lg-2">
                 <h3 class="h6 text-uppercase">Primary</h3>
-                <a href="/courses.php?category=cad">CAD & BIM Courses</a>
+                <a href="/courses/cad/">CAD & BIM Courses</a>
                 <a href="/training.php">Industrial Training</a>
                 <a href="/contact.php">Course Enquiry</a>
             </div>
             <div class="col-6 col-lg-2">
                 <h3 class="h6 text-uppercase">Explore</h3>
-                <a href="/courses.php?category=design">Design & Media</a>
-                <a href="/courses.php?category=it">IT & Coding</a>
+                <a href="/courses/design/">Design & Media</a>
+                <a href="/courses/it/>IT & Coding</a>
                 <a href="/admissions.php">College Admissions</a>
                 <a href="/blog/">Blog</a>
             </div>

@@ -8,16 +8,16 @@ if (!$course) {
     http_response_code(404);
     $pageTitle = 'Course Not Found | CadMate India';
     $pageDescription = 'Browse available CAD, design, media, programming, data and technology courses at CadMate India in Jaipur.';
-    $canonicalUrl = 'https://cadmateindia.com/courses.php';
+    $canonicalUrl = 'https://cadmateindia.com/courses/';
     require __DIR__ . '/includes/header.php';
-    echo '<section class="section-space"><div class="container"><div class="content-card"><h1>Course not found</h1><p class="text-secondary">The requested course is not available in the current catalog.</p><a class="btn btn-brand" href="/courses.php">Browse Courses</a></div></div></section>';
+    echo '<section class="section-space"><div class="container"><div class="content-card"><h1>Course not found</h1><p class="text-secondary">The requested course is not available in the current catalog.</p><a class="btn btn-brand" href="/courses/">Browse Courses</a></div></div></section>';
     require __DIR__ . '/includes/footer.php';
     exit;
 }
 
 $pageTitle = $course['name'] . ' Course in Jaipur | CadMate India';
 $pageDescription = 'Explore ' . $course['name'] . ' training in Jaipur at CadMate India with a practical learning focus and course counselling.';
-$canonicalUrl = 'https://cadmateindia.com/course.php?slug=' . rawurlencode($course['slug']);
+$canonicalUrl = 'https://cadmateindia.com/courses/' . rawurlencode($course['slug']) . '/';
 
 $group = $courseGroups[$course['group_key']];
 $related = array_values(array_filter($group['courses'], static fn($item) => $item['slug'] !== $course['slug']));
@@ -43,7 +43,7 @@ require __DIR__ . '/includes/header.php';
 <section class="course-detail-hero">
     <div class="container">
         <div class="courses-breadcrumb">
-            <a href="/">Home</a><span>›</span><a href="/courses.php">Courses</a><span>›</span><a href="/courses.php?category=<?= e($course['group_key']) ?>"><?= e($course['group_label']) ?></a><span>›</span><span><?= e($course['name']) ?></span>
+            <a href="/">Home</a><span>›</span><a href="/courses/">Courses</a><span>›</span><a href="/courses/<?= e($course['group_key']) ?>/"><?= e($course['group_label']) ?></a><span>›</span><span><?= e($course['name']) ?></span>
         </div>
 
         <div class="row g-5 align-items-center">
@@ -54,7 +54,7 @@ require __DIR__ . '/includes/header.php';
 
                 <div class="course-detail-actions">
                     <a class="btn btn-brand btn-lg" href="#enquire">Request Course Counselling</a>
-                    <a class="btn btn-outline-dark btn-lg" href="/courses.php?category=<?= e($course['group_key']) ?>">Explore Related Courses</a>
+                    <a class="btn btn-outline-dark btn-lg" href="/courses/<?= e($course['group_key']) ?>/">Explore Related Courses</a>
                 </div>
 
                 <div class="course-quick-facts">
@@ -112,12 +112,12 @@ require __DIR__ . '/includes/header.php';
                             <div class="eyebrow mb-2">Keep exploring</div>
                             <h2 class="h3 mb-0">Related <?= e($course['group_label']) ?> courses</h2>
                         </div>
-                        <a class="group-link" href="/courses.php?category=<?= e($course['group_key']) ?>">View full track →</a>
+                        <a class="group-link" href="/courses/<?= e($course['group_key']) ?>/">View full track →</a>
                     </div>
                     <div class="row g-3">
                         <?php foreach ($related as $item): ?>
                             <div class="col-md-4">
-                                <a class="related-course-card" href="/course.php?slug=<?= e($item['slug']) ?>">
+                                <a class="related-course-card" href="/courses/<?= e($item['slug']) ?>/">
                                     <small><?= e($item['discipline']) ?></small>
                                     <strong><?= e($item['name']) ?></strong>
                                     <span>View course →</span>

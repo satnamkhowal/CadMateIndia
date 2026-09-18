@@ -38,3 +38,12 @@ Public business details and canonical social URLs are maintained in `config/site
 - Refreshed course cards, filters, hero, counselling section and mobile layout.
 - Refreshed `course.php` design with Course structured data, quick facts, learning approach, related courses and sticky enquiry.
 - Original CadMate India supplied logo/icon remain unchanged; only proportional display sizing is used.
+
+
+### SEO Course URL Cleanup — 2026-09-18
+- Added `/courses/` rewrite to the existing Apache routing rules.
+- Switched internal course catalog links from query-string URLs to clean SEO routes.
+- Category URLs now use `/courses/cad/`, `/courses/design/`, and `/courses/it/`.
+- Individual course URLs now use `/courses/{course-slug}/`.
+- Updated course canonical URLs and ItemList/Course structured-data URLs to the clean route format.
+- Updated homepage, header and footer course links to use the clean route structure.

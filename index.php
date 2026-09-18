@@ -46,7 +46,7 @@ $schema = [
                 <h1>Learn CAD. <span class="gradient-text">Design Better.</span><br>Build job-ready skills.</h1>
                 <p class="lead mt-4">Start with practical CAD, BIM and engineering design training, then expand into graphic design, video editing, programming, data and technology skills—all under one learning ecosystem.</p>
                 <div class="d-flex flex-wrap gap-3 mt-4">
-                    <a class="btn btn-brand btn-lg px-4" href="/courses.php?category=cad">Explore CAD Courses</a>
+                    <a class="btn btn-brand btn-lg px-4" href="/courses/cad/">Explore CAD Courses</a>
                     <?php if ($whatsapp): ?><a class="btn btn-outline-dark btn-lg px-4" href="https://wa.me/<?= e($whatsapp) ?>" target="_blank" rel="noopener">WhatsApp Counselling</a><?php endif; ?>
                 </div>
                 <div class="trust-row mt-4">
@@ -62,9 +62,9 @@ $schema = [
                     <div class="eyebrow mt-3">Upskill yourself for better careers</div>
                     <h2 class="h3 mt-2">Three focused learning tracks</h2>
                     <div class="track-list mt-4">
-                        <a href="/courses.php?category=cad"><span>01</span><div><strong>CAD & Engineering Design</strong><small>Primary focus</small></div><b>→</b></a>
-                        <a href="/courses.php?category=design"><span>02</span><div><strong>Design, Media & Marketing</strong><small>Creative skills</small></div><b>→</b></a>
-                        <a href="/courses.php?category=it"><span>03</span><div><strong>IT, Coding & Data</strong><small>Technology skills</small></div><b>→</b></a>
+                        <a href="/courses/cad/"><span>01</span><div><strong>CAD & Engineering Design</strong><small>Primary focus</small></div><b>→</b></a>
+                        <a href="/courses/design/"><span>02</span><div><strong>Design, Media & Marketing</strong><small>Creative skills</small></div><b>→</b></a>
+                        <a href="/courses/it/"><span>03</span><div><strong>IT, Coding & Data</strong><small>Technology skills</small></div><b>→</b></a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ $schema = [
         <div class="row g-4">
             <?php foreach (array_slice($courseGroups['cad']['courses'], 0, 6) as $i => $course): ?>
                 <div class="col-sm-6 col-lg-4">
-                    <a class="cad-card" href="/course.php?slug=<?= e($course['slug']) ?>">
+                    <a class="cad-card" href="/courses/<?= e($course['slug']) ?>/">
                         <div class="cad-card-top">
                             <span class="cad-number"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
                             <span class="cad-chip"><?= e($course['discipline']) ?></span>
@@ -96,7 +96,7 @@ $schema = [
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-4">
-            <a class="btn btn-dark px-4" href="/courses.php?category=cad">View all CAD & BIM courses</a>
+            <a class="btn btn-dark px-4" href="/courses/cad/">View all CAD & BIM courses</a>
         </div>
     </div>
 </section>
@@ -109,7 +109,7 @@ $schema = [
                 <h2 class="display-6 fw-bold text-white">Creative + technology courses that complement your core skills.</h2>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a class="text-white fw-bold" href="/courses.php">Explore all courses →</a>
+                <a class="text-white fw-bold" href="/courses/">Explore all courses →</a>
             </div>
         </div>
         <div class="row g-4">
@@ -123,7 +123,7 @@ $schema = [
             foreach ($featured as $course):
             ?>
                 <div class="col-sm-6 col-lg-3">
-                    <a class="image-course-card" href="/course.php?slug=<?= e($course['slug']) ?>">
+                    <a class="image-course-card" href="/courses/<?= e($course['slug']) ?>/">
                         <?php if (!empty($course['image'])): ?><img src="/<?= e($course['image']) ?>" alt="<?= e($course['name']) ?> course in Jaipur" loading="lazy"><?php endif; ?>
                         <div class="image-course-overlay">
                             <small><?= e($course['discipline']) ?></small>

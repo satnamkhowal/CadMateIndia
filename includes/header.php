@@ -51,29 +51,29 @@ $currentPath = currentUrlPath();
                     <li class="nav-item"><a class="nav-link<?= $currentPath === '/' ? ' active' : '' ?>" href="/">Home</a></li>
 
                     <li class="nav-item dropdown position-static">
-                        <a class="nav-link dropdown-toggle<?= $currentPath === '/courses.php' || $currentPath === '/course.php' ? ' active' : '' ?>" href="/courses.php" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Courses</a>
+                        <a class="nav-link dropdown-toggle<?= str_starts_with($currentPath, '/courses') ? ' active' : '' ?>" href="/courses/" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Courses</a>
                         <div class="dropdown-menu mega-courses border-0 shadow-lg">
                             <div class="mega-courses-head">
                                 <div>
                                     <span class="mega-eyebrow">CadMate India Courses</span>
                                     <strong>Choose your learning track</strong>
                                 </div>
-                                <a href="/courses.php">View all courses →</a>
+                                <a href="/courses/">View all courses →</a>
                             </div>
                             <div class="mega-courses-grid">
                                 <?php foreach ($courseGroups as $key => $group): ?>
                                     <div class="mega-course-column">
-                                        <a class="mega-group-title" href="/courses.php?category=<?= e($key) ?>">
+                                        <a class="mega-group-title" href="/courses/<?= e($key) ?>/">
                                             <span><?= e((string)$group['priority']) ?></span>
                                             <div><strong><?= e($group['label']) ?></strong><small><?= count($group['courses']) ?> courses</small></div>
                                         </a>
                                         <?php foreach (array_slice($group['courses'], 0, 5) as $course): ?>
-                                            <a class="mega-course-link" href="/course.php?slug=<?= e($course['slug']) ?>">
+                                            <a class="mega-course-link" href="/courses/<?= e($course['slug']) ?>/">
                                                 <strong><?= e($course['name']) ?></strong>
                                                 <small><?= e($course['discipline']) ?></small>
                                             </a>
                                         <?php endforeach; ?>
-                                        <a class="mega-view-all" href="/courses.php?category=<?= e($key) ?>">All <?= e($group['label']) ?> →</a>
+                                        <a class="mega-view-all" href="/courses/<?= e($key) ?>/">All <?= e($group['label']) ?> →</a>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
