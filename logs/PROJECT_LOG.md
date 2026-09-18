@@ -54,3 +54,13 @@ Public business details and canonical social URLs are maintained in `config/site
 - Added public `/sitemap.xml` rewrite.
 - Added `robots.txt` with sitemap reference and protection for form/storage endpoints.
 - Sitemap uses the new clean `/courses/` URL structure.
+
+
+### Footer, Contact Actions & Conversion SEO — 2026-09-18
+- Rebuilt the shared footer with a richer dark layout, clearer course/navigation links, Jaipur centre blocks, social links and stronger internal linking.
+- Added floating WhatsApp and direct-call buttons site-wide using verified phone/WhatsApp +91 8690047091.
+- Added an official WhatsApp-style brand glyph and accessible labels for quick contact.
+- Fixed the malformed IT & Coding footer URL and linked it to the clean `/courses/it/` route.
+- Added structured organization details from the verified site configuration.
+- Dark-background horizontal logo requested by the user is not currently present in the repository tree. Footer now auto-detects the requested dark-logo filename if it is deployed, otherwise safely falls back to the existing official light-background logo inside a white logo panel.
+- Commit: `88becbe25fac4b5f640833424b942948355b964b`.
