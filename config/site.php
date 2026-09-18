@@ -14,7 +14,7 @@ return [
     'address' => '122/66, Madhyam Marg, near Vijay Path, Sector 122, Agarwal Farm, Sector 12, Mansarovar, Jaipur, Rajasthan 302020',
     'google_maps_url' => 'https://maps.app.goo.gl/QZuuxMeGfUgKi8cA7',
     'logo' => '',
-    'favicon' => '',
+    'favicon' => '/assets/brand/cadmate-icon.png',
     'social' => [
         'facebook' => 'https://www.facebook.com/CadMateIndiaJaipur',
         'instagram' => 'https://www.instagram.com/CadMateIndia',

@@ -1,6 +1,7 @@
 <?php
 $pageTitle = $pageTitle ?? ($site['name'] . ' | CAD, Design & IT Training in Jaipur');
-$pageDescription = $pageDescription ?? 'CadMate India offers practical CAD, engineering design, creative design and technology training in Jaipur.';
+$pageDescription = $pageDescription ?? ($site['seo_description'] ?? 'CadMate India offers practical CAD, engineering design, creative design and technology training in Jaipur.');
+$canonicalUrl = $canonicalUrl ?? null;
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,7 +10,14 @@ $pageDescription = $pageDescription ?? 'CadMate India offers practical CAD, engi
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle) ?></title>
     <meta name="description" content="<?= e($pageDescription) ?>">
-    <?php if (!empty($site['favicon'])): ?><link rel="icon" href="<?= e($site['favicon']) ?>"><?php endif; ?>
+    <?php if ($canonicalUrl): ?><link rel="canonical" href="<?= e($canonicalUrl) ?>"><?php endif; ?>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?= e($pageTitle) ?>">
+    <meta property="og:description" content="<?= e($pageDescription) ?>">
+    <?php if ($canonicalUrl): ?><meta property="og:url" content="<?= e($canonicalUrl) ?>"><?php endif; ?>
+    <meta property="og:site_name" content="CadMate India">
+    <meta name="twitter:card" content="summary">
+    <?php if (!empty($site['favicon'])): ?><link rel="icon" type="image/png" href="<?= e($site['favicon']) ?>"><?php endif; ?>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/site.css">
@@ -20,19 +28,16 @@ $pageDescription = $pageDescription ?? 'CadMate India offers practical CAD, engi
         <div class="container d-flex flex-wrap gap-3 justify-content-between align-items-center py-2">
             <span>CAD • BIM • Design • Coding • Data</span>
             <div class="d-flex gap-3">
-                <?php if (!empty($site['phone'])): ?><a href="tel:<?= e(preg_replace('/\D+/', '', $site['phone'])) ?>"><?= e($site['phone']) ?></a><?php endif; ?>
+                <?php if (!empty($site['phone'])): ?><a href="tel:+91<?= e(preg_replace('/\D+/', '', $site['phone'])) ?>">+91 <?= e($site['phone']) ?></a><?php endif; ?>
                 <?php if (!empty($site['email'])): ?><a href="mailto:<?= e($site['email']) ?>"><?= e($site['email']) ?></a><?php endif; ?>
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-xl bg-white border-bottom py-3">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom py-2">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
-                <?php if (!empty($site['logo'])): ?>
-                    <img src="<?= e($site['logo']) ?>" alt="CadMate India" class="brand-logo">
-                <?php else: ?>
-                    <span class="brand-mark">CM</span><span>CadMate India</span>
-                <?php endif; ?>
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/" aria-label="CadMate India home">
+                <img src="/assets/brand/cadmate-icon.png" alt="" class="brand-icon">
+                <span class="brand-wordmark"><strong>CADMATE</strong><small>Upskill Yourself for Better Careers</small></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
