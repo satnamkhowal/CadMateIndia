@@ -19,7 +19,7 @@ return [
         'facebook' => 'https://www.facebook.com/CadMateIndiaJaipur',
         'instagram' => 'https://www.instagram.com/CadMateIndia',
         'linkedin' => '',
-        'youtube' => '',
+        'youtube' => 'https://www.youtube.com/@CadMateIndia',
     ],
     'locations' => [
         [
