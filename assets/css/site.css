@@ -354,3 +354,37 @@ img { max-width: 100%; }
     .courses-hero-stats { grid-template-columns: 1fr; }
     .course-card-media,.course-card-media img,.course-card-visual { min-height: 180px; height: 180px; }
 }
+
+/* === Mobile-first stability pass — 2026-09-22 === */
+html { overflow-x: hidden; }
+body { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+img, svg, video, canvas, iframe { max-width: 100%; height: auto; }
+@media (max-width: 1199.98px) {
+  .site-header .top-strip .container { justify-content: center !important; text-align: center; }
+  .site-header .top-strip .container > * { min-width: 0; }
+  .navbar-brand { min-width: 0; max-width: calc(100% - 64px); }
+  .brand-logo { width: min(190px, 58vw); height: auto; }
+  .navbar-toggler { width: 44px; height: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+  #mainNav { max-height: calc(100vh - 118px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 0 16px; }
+  #mainNav .nav-link, #mainNav .dropdown-item, #mainNav .mega-course-link, #mainNav .mega-group-title {
+    min-height: 44px; white-space: normal; overflow-wrap: anywhere;
+  }
+  .mega-courses { position: static !important; width: 100% !important; max-width: 100%; max-height: none; overflow: visible; }
+  .mega-courses-grid { grid-template-columns: 1fr; }
+  .row > [class*="col-"] { min-width: 0; }
+  table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+@media (max-width: 767.98px) {
+  body { font-size: 16px; }
+  input, select, textarea, button { font-size: 16px !important; max-width: 100%; }
+  .container, .container-fluid { padding-left: 16px !important; padding-right: 16px !important; }
+  .top-strip { font-size: 12px; }
+  .top-strip-focus { width: 100%; text-align: center; }
+  .brand-logo { width: min(168px, 54vw); }
+  .section-space { padding-top: 48px !important; padding-bottom: 48px !important; }
+  .hero h1, h1.display-*, .display-6 { font-size: clamp(2rem, 9vw, 2.8rem) !important; line-height: 1.08 !important; overflow-wrap: anywhere; }
+  h2, h3 { overflow-wrap: anywhere; }
+  .hero .d-flex.gap-3 { gap: 10px !important; }
+  .hero .btn, .nav-cta, .btn, button, input[type="submit"] { min-height: 44px; }
+  .hero-brand-card, .lead-wrap, .cad-card, .location-card { min-width: 0; }
+}
